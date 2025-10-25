@@ -32,5 +32,6 @@ nr=$(cat "${file}") || abort "Datei ${file} konnte nicht gelesen werden."
 
 # Belegnummer inkrementieren, speichern und ausgeben.
 nr=$((nr+1))
-echo "${nr}" > "${file}" || abort "${file} konnte nicht aktualisiert werden."
+tmp=$(mktemp)
+echo "${nr}" > "${tmp}" && mv "${tmp}" "${file}" || abort "${file} konnte nicht aktualisiert werden."
 echo "${prefix}${nr}"
