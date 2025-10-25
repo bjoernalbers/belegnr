@@ -1,0 +1,36 @@
+#!/bin/sh
+# belegnr - Erzeugt fortlaufende, lückenlose Belegnummern für deine Buchhaltung
+
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
+
+# Jede Belegnummer beginnt mit dieser Zeichenkette.
+prefix="BE-"
+
+# Die Zahl, ab der fortlaufende Belegnummern erzeugt werden.
+start=1000
+
+# In dieser Datei wird die zuletzt erzeugte Belegnummer gespeichert.
+file="${HOME}/.belegnr"
+
+# Bricht das Skript mit gegebener Fehlermeldung ab.
+abort() {
+	echo "${0##*/}: $*" >&2
+	exit 1
+}
+
+# Abbruch, wenn $HOME nicht gesetzt ist.
+[ -n "${HOME}" ] || abort "Variable HOME ist nicht definiert oder leer."
+
+# Lege Belegnummerndatei an, falls diese nicht existiert.
+if [ ! -f "${file}" ]; then
+	echo "${start}" > "${file}" || abort "${file} konnte nicht angelegt werden."
+fi
+
+# Lese Belegnummerndatei ein und prüfe, ob der Inhalt eine natürliche Zahl ist.
+nr=$(cat "${file}") || abort "Datei ${file} konnte nicht gelesen werden."
+[ "${nr}" -ge 0 ] 2> /dev/null || abort "Datei ${file} enthält keine gültige Belegnummer."
+
+# Belegnummer inkrementieren, speichern und ausgeben.
+nr=$((nr+1))
+echo "${nr}" > "${file}" || abort "${file} konnte nicht aktualisiert werden."
+echo "${prefix}${nr}"
