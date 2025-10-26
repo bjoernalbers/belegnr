@@ -77,7 +77,7 @@ else
 fi
 
 # Write current number atomically.
-tmp=$(mktemp)
+tmp=$(mktemp) || abort "failed to create temporary file"
 echo "${nr}" > "${tmp}" && mv "${tmp}" "${file}" || abort "could not write file: ${file}"
 
 # Output the formatted document number.
