@@ -28,6 +28,12 @@ abort() {
 	exit 1
 }
 
+# Display usage and exit when no option is given.
+if [ "$#" -eq 0 ]; then
+	display_usage
+	exit
+fi
+
 # Process options.
 while getopts 'h' opt; do
 	case "${opt}" in
