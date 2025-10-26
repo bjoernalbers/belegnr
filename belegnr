@@ -44,7 +44,7 @@ while getopts 'f:hn' opt; do
 			;;
 		h)
 			display_usage
-			exit
+			exit 0
 			;;
 		n)
 			action="new"
@@ -60,7 +60,7 @@ shift $((OPTIND-1))
 # Display help and exit if no action specified.
 if [ -z "${action}" ]; then
        display_usage
-       exit
+       exit 0
 fi
 
 # Abort, if $HOME not set.
