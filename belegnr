@@ -15,6 +15,9 @@ start=1000
 # In dieser Datei wird die zuletzt erzeugte Belegnummer gespeichert.
 file="${HOME}/.belegnr"
 
+# Which action to perform.
+action=""
+
 # Display usage.
 display_usage() {
 cat <<EOM
@@ -23,6 +26,7 @@ Usage: ${script_name} [OPTIONS]
 Options:
   -f  File to store latest Belegnummer (default: ~/.belegnr)
   -h  Display usage and exit
+  -n  Create new Belegnummer
 EOM
 }
 
@@ -32,14 +36,8 @@ abort() {
 	exit 1
 }
 
-# Display usage and exit when no option is given.
-if [ "$#" -eq 0 ]; then
-	display_usage
-	exit
-fi
-
 # Process options.
-while getopts 'f:h' opt; do
+while getopts 'f:hn' opt; do
 	case "${opt}" in
 		f)
 			file="${OPTARG}"
@@ -47,6 +45,9 @@ while getopts 'f:h' opt; do
 		h)
 			display_usage
 			exit
+			;;
+		n)
+			action="new"
 			;;
 		*)
 			display_usage
@@ -56,20 +57,26 @@ while getopts 'f:h' opt; do
 done
 shift $((OPTIND-1))
 
+# Display help and exit if no action is defined.
+if [ -z "${action}" ]; then
+       display_usage
+       exit
+fi
+
 # Abbruch, wenn $HOME nicht gesetzt ist.
 [ -n "${HOME}" ] || abort "Variable HOME ist nicht definiert oder leer."
 
-# Lege Belegnummerndatei an, falls diese nicht existiert.
-if [ ! -f "${file}" ]; then
-	echo "${start}" > "${file}" || abort "${file} konnte nicht angelegt werden."
+# If file exists, read and validate content, then increment number.
+if [ -f "${file}" ]; then
+	nr=$(cat "${file}") || abort "Datei ${file} konnte nicht gelesen werden."
+	[ "${nr}" -ge 0 ] 2> /dev/null || abort "Datei ${file} enthält keine gültige Belegnummer."
+	nr=$((nr+1))
+# Else use start number.
+else
+	nr="${start}"
 fi
 
-# Lese Belegnummerndatei ein und prüfe, ob der Inhalt eine natürliche Zahl ist.
-nr=$(cat "${file}") || abort "Datei ${file} konnte nicht gelesen werden."
-[ "${nr}" -ge 0 ] 2> /dev/null || abort "Datei ${file} enthält keine gültige Belegnummer."
-
-# Belegnummer inkrementieren, speichern und ausgeben.
-nr=$((nr+1))
+# Write current number to file.
 tmp=$(mktemp)
 echo "${nr}" > "${tmp}" && mv "${tmp}" "${file}" || abort "${file} konnte nicht aktualisiert werden."
 echo "${prefix}${nr}"
