@@ -12,11 +12,32 @@ start=1000
 # In dieser Datei wird die zuletzt erzeugte Belegnummer gespeichert.
 file="${HOME}/.belegnr"
 
+# Display usage.
+display_usage() {
+cat <<EOM
+Usage: ${0##*/} [OPTIONS]
+
+Options:
+  -h  Display usage and exit
+EOM
+}
+
 # Bricht das Skript mit gegebener Fehlermeldung ab.
 abort() {
 	echo "${0##*/}: $*" >&2
 	exit 1
 }
+
+# Process options.
+while getopts 'h' opt; do
+	case "${opt}" in
+		h)
+			display_usage
+			exit
+			;;
+	esac
+done
+shift $((OPTIND-1))
 
 # Abbruch, wenn $HOME nicht gesetzt ist.
 [ -n "${HOME}" ] || abort "Variable HOME ist nicht definiert oder leer."
