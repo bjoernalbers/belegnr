@@ -21,6 +21,7 @@ cat <<EOM
 Usage: ${script_name} [OPTIONS]
 
 Options:
+  -f  File to store latest Belegnummer (default: ~/.belegnr)
   -h  Display usage and exit
 EOM
 }
@@ -38,8 +39,11 @@ if [ "$#" -eq 0 ]; then
 fi
 
 # Process options.
-while getopts 'h' opt; do
+while getopts 'f:h' opt; do
 	case "${opt}" in
+		f)
+			file="${OPTARG}"
+			;;
 		h)
 			display_usage
 			exit
