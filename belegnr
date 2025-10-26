@@ -3,6 +3,9 @@
 
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
+# Basename of this script
+script_name="${0##*/}"
+
 # Jede Belegnummer beginnt mit dieser Zeichenkette.
 prefix="BE-"
 
@@ -15,7 +18,7 @@ file="${HOME}/.belegnr"
 # Display usage.
 display_usage() {
 cat <<EOM
-Usage: ${0##*/} [OPTIONS]
+Usage: ${script_name} [OPTIONS]
 
 Options:
   -h  Display usage and exit
@@ -24,7 +27,7 @@ EOM
 
 # Bricht das Skript mit gegebener Fehlermeldung ab.
 abort() {
-	echo "${0##*/}: $*" >&2
+	echo "${script_name}: $*" >&2
 	exit 1
 }
 
