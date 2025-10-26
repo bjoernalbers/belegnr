@@ -15,8 +15,8 @@ every document in the accounting system must be assigned a **unique document num
 
 Source: [GoBD, issue 2023](https://ao.bundesfinanzministerium.de/ao/2023/Anhaenge/BMF-Schreiben-und-gleichlautende-Laendererlasse/Anhang-64/inhalt.html)
 
-Since the use of *foreign* invoice numbers does not guarantee uniqueness of
-document numbers, I wrote this little script.
+Since using *foreign* invoice numbers does not guarantee unique document
+numbers, I wrote this little script.
 `belegnr` helps with your bookkeeping by creating sequential, unique document
 numbers a.k.a "Belegnummern".
 
@@ -37,7 +37,8 @@ You can also clone this repository and run `make install`.
 
 ## Usage
 
-Run `belegnr` without options (or with -h) to display usage instructions:
+Run `belegnr` without options (or with `-h` flag) to display usage
+instructions:
 
 ```
 $ belegnr
@@ -50,7 +51,7 @@ Options:
   -n  Create new document number (Belegnummer)
 ```
 
-To create a new unique document numbers use the -n flag:
+To create a new unique document number, use the `-n` flag:
 
 ```
 $ belegnr -n
