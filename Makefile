@@ -11,6 +11,8 @@ test:
 	! $(SCRIPT) -x >/dev/null 2>&1
 	# Create first Belegnummer when Belegnummerdatei is missing.
 	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1000
+	# Increment Belegnummer.
+	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1001
 	rm -rf "$(TEST_DIR)"
 
 .PHONY: test
