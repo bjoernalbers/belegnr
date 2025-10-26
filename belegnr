@@ -44,6 +44,10 @@ while getopts 'h' opt; do
 			display_usage
 			exit
 			;;
+		*)
+			display_usage
+			exit 1
+			;;
 	esac
 done
 shift $((OPTIND-1))
