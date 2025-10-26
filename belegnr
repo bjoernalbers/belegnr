@@ -18,12 +18,16 @@ file="${HOME}/.belegnr"
 # Which action to perform.
 action=""
 
+# Copy document number (Belegnummer) also to macOS clipboard?
+clipboard=false
+
 # Display usage information.
 display_usage() {
 cat <<EOM
 Usage: ${script_name} [OPTIONS]
 
 Options:
+  -c  Copy document number (Belegnummer) to macOS clipboard instead to stdout
   -f  File to store the current number (default: ~/.belegnr)
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
@@ -37,8 +41,11 @@ abort() {
 }
 
 # Parse options.
-while getopts 'f:hn' opt; do
+while getopts 'cf:hn' opt; do
 	case "${opt}" in
+		c)
+			clipboard=true
+			;;
 		f)
 			file="${OPTARG}"
 			;;
@@ -83,4 +90,9 @@ if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${file}"); then
 fi
 
 # Output the formatted document number.
-echo "${prefix}${nr}"
+document_nr="${prefix}${nr}"
+if $clipboard; then
+	echo "${document_nr}" | pbcopy
+else
+	echo "${document_nr}"
+fi
