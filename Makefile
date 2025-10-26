@@ -1,6 +1,10 @@
 SCRIPT := ./belegnr
 TEST_DIR := $(shell mktemp -d)
 TEST_FILE := $(TEST_DIR)/.belegnr
+DEST_DIR := /usr/local/bin
+
+install:
+	sudo cp -v "$(SCRIPT)" "$(DEST_DIR)"
 
 test:
 	# Display usage when no option is given.
@@ -18,4 +22,4 @@ test:
 	pbpaste | grep -q BE-1002
 	rm -rf "$(TEST_DIR)"
 
-.PHONY: test
+.PHONY: install test
