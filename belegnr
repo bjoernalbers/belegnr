@@ -1,42 +1,42 @@
 #!/bin/sh
-# belegnr - Erzeugt fortlaufende, lückenlose Belegnummern für deine Buchhaltung
+# belegnr — Generate sequential, unique document numbers (Belegnummern)
 
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
-# Basename of this script
+# File name of this script (without path).
 script_name="${0##*/}"
 
-# Jede Belegnummer beginnt mit dieser Zeichenkette.
+# Each document number (Belegnummer) starts with this string.
 prefix="BE-"
 
-# Die Zahl, ab der fortlaufende Belegnummern erzeugt werden.
+# The first number.
 start=1000
 
-# In dieser Datei wird die zuletzt erzeugte Belegnummer gespeichert.
+# Default file to store the current number.
 file="${HOME}/.belegnr"
 
 # Which action to perform.
 action=""
 
-# Display usage.
+# Display usage information.
 display_usage() {
 cat <<EOM
 Usage: ${script_name} [OPTIONS]
 
 Options:
-  -f  File to store latest Belegnummer (default: ~/.belegnr)
+  -f  File to store the current number (default: ~/.belegnr)
   -h  Display usage and exit
-  -n  Create new Belegnummer
+  -n  Create new document number (Belegnummer)
 EOM
 }
 
-# Bricht das Skript mit gegebener Fehlermeldung ab.
+# Abort script with an error message.
 abort() {
 	echo "${script_name}: $*" >&2
 	exit 1
 }
 
-# Process options.
+# Parse options.
 while getopts 'f:hn' opt; do
 	case "${opt}" in
 		f)
@@ -57,26 +57,28 @@ while getopts 'f:hn' opt; do
 done
 shift $((OPTIND-1))
 
-# Display help and exit if no action is defined.
+# Display help and exit if no action specified.
 if [ -z "${action}" ]; then
        display_usage
        exit
 fi
 
-# Abbruch, wenn $HOME nicht gesetzt ist.
-[ -n "${HOME}" ] || abort "Variable HOME ist nicht definiert oder leer."
+# Abort, if $HOME not set.
+[ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
-# If file exists, read and validate content, then increment number.
+# If file exists, read, validate and increment number.
 if [ -f "${file}" ]; then
-	nr=$(cat "${file}") || abort "Datei ${file} konnte nicht gelesen werden."
-	[ "${nr}" -ge 0 ] 2> /dev/null || abort "Datei ${file} enthält keine gültige Belegnummer."
+	nr=$(cat "${file}") || abort "could not read file: ${file}"
+	[ "${nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${file}"
 	nr=$((nr+1))
-# Else use start number.
+# Else start from scratch.
 else
 	nr="${start}"
 fi
 
-# Write current number to file.
+# Write current number atomically.
 tmp=$(mktemp)
-echo "${nr}" > "${tmp}" && mv "${tmp}" "${file}" || abort "${file} konnte nicht aktualisiert werden."
+echo "${nr}" > "${tmp}" && mv "${tmp}" "${file}" || abort "could not write file: ${file}"
+
+# Output the formatted document number.
 echo "${prefix}${nr}"
