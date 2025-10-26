@@ -6,7 +6,7 @@ export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 # File name of this script (without path).
 script_name="${0##*/}"
 
-# Each document number (Belegnummer) starts with this string.
+# Each document number starts with this string.
 prefix="BE-"
 
 # The first number.
@@ -18,7 +18,7 @@ file="${HOME}/.belegnr"
 # Which action to perform.
 action=""
 
-# Copy document number (Belegnummer) also to macOS clipboard?
+# Copy document number also to macOS clipboard?
 clipboard=false
 
 # Display usage information.
