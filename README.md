@@ -1,6 +1,6 @@
 # belegnr — Generate sequential, unique document numbers (Belegnummern)
 
-`belegnr` is a simple shell script to make you and the Bundesfinanzministerium happy :-)
+`belegnr` is a simple shell script to make you and the Finanzamt happy :-)
 
 ## Why?
 
