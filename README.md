@@ -48,6 +48,7 @@ Usage: belegnr [OPTIONS]
 Options:
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
+  -r  Reset counter
 ```
 
 To create a new unique document number, use the `-n` flag:

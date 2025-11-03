@@ -24,6 +24,7 @@ Usage: ${SCRIPT_NAME} [OPTIONS]
 Options:
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
+  -r  Reset counter
 EOM
 }
 
@@ -31,6 +32,12 @@ EOM
 abort() {
 	echo "${SCRIPT_NAME}: $*" >&2
 	exit 1
+}
+
+# Reset counter.
+reset_counter() {
+	write_nr "${START}"
+	print_nr "${START}"
 }
 
 # Create new document number.
@@ -57,7 +64,7 @@ read_nr() {
 # Write current number atomically.
 write_nr() {
 	tmp=$(mktemp) || abort "failed to create temporary file"
-	if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
+	if ! (echo "$1" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
 	       abort "could not write file: ${BELEGNR_FILE}"
 	fi
 }
@@ -71,7 +78,7 @@ print_nr() {
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
-while getopts 'hn' opt; do
+while getopts 'hnr' opt; do
 	case "${opt}" in
 		h)
 			display_usage
@@ -79,6 +86,10 @@ while getopts 'hn' opt; do
 			;;
 		n)
 			new_nr
+			exit 0
+			;;
+		r)
+			reset_counter
 			exit 0
 			;;
 		*)
