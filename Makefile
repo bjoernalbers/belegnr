@@ -30,13 +30,13 @@ test:
 	# Abort with invalid option.
 	! $(SCRIPT) -x >/dev/null 2>&1
 	# Create first Belegnummer when Belegnummerdatei is missing.
-	$(SCRIPT) -n | grep -q BE-1000
+	$(SCRIPT) -n | grep -qE '^BE-1$$'
 	# Increment Belegnummer.
-	$(SCRIPT) -n | grep -q BE-1001
+	$(SCRIPT) -n | grep -qE '^BE-2$$'
 	# Abort counter reset.
 	echo "" | $(SCRIPT) -r 2000 | grep -vq BE-
 	# Reset counter.
-	echo "yes" | $(SCRIPT) -r 2000 | grep -q BE-2000
+	echo "yes" | $(SCRIPT) -r 2000 | grep -qE 'BE-2000$$'
 	rm -rf "$(TEST_DIR)"
 
 $(DISTRIBUTION_PKG): $(SCRIPT)

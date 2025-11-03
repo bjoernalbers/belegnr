@@ -55,19 +55,26 @@ To create a new unique document number, use the `-n` flag:
 
 ```
 $ belegnr -n
-BE-1000
+BE-1
 $ belegnr -n
-BE-1001
+BE-2
 $ belegnr -n
-BE-1002
+BE-3
 ```
 
-As you can see, document numbering starts at 1000.
+To start at a different number, just reset the counter:
+
+```
+$ belegnr -r 1000
+Really reset counter? (y/N): y
+BE-1000
+```
+
 The current number is stored in the file `~/.belegnr`:
 
 ```
 $ cat ~/.belegnr
-1002
+1000
 ```
 
 ## Uninstallation

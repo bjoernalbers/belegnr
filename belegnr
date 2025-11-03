@@ -10,7 +10,7 @@ SCRIPT_NAME="${0##*/}"
 PREFIX="BE-"
 
 # The first number.
-START=1000
+START=1
 
 # File to store the current number, which is overwritable via environment
 # variable BELEGNR_FILE.
