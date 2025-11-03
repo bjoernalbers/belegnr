@@ -33,6 +33,9 @@ test:
 	$(SCRIPT) -n | grep -q BE-1000
 	# Increment Belegnummer.
 	$(SCRIPT) -n | grep -q BE-1001
+	# Reset counter.
+	#echo "yes" | $(SCRIPT) -r
+	#$(SCRIPT) -n | grep -q BE-1000
 	rm -rf "$(TEST_DIR)"
 
 $(DISTRIBUTION_PKG): $(SCRIPT)

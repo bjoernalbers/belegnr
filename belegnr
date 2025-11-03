@@ -36,6 +36,20 @@ abort() {
 	exit 1
 }
 
+# Create new document number.
+new_nr() {
+	# If file exists, read and increment number.
+	if [ -f "${BELEGNR_FILE}" ]; then
+		nr=$(read_nr)
+		nr=$((nr+1))
+	# Else start from scratch.
+	else
+		nr="${START}"
+	fi
+	write_nr "${nr}"
+	print_nr "${nr}"
+}
+
 # Read and validate current number from file.
 read_nr() {
 	_nr=$(cat "${BELEGNR_FILE}") || abort "could not read file: ${BELEGNR_FILE}"
@@ -55,6 +69,9 @@ write_nr() {
 print_nr() {
 	echo "${PREFIX}$1"
 }
+
+# Abort, if $HOME not set.
+[ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
 while getopts 'hn' opt; do
@@ -80,18 +97,4 @@ if [ -z "${ACTION}" ]; then
        exit 0
 fi
 
-# Abort, if $HOME not set.
-[ -n "${HOME}" ] || abort "variable HOME not defined or empty"
-
-# If file exists, read, validate and increment number.
-if [ -f "${BELEGNR_FILE}" ]; then
-	nr=$(read_nr)
-	nr=$((nr+1))
-# Else start from scratch.
-else
-	nr="${START}"
-fi
-
-write_nr "${nr}"
-
-print_nr "${nr}"
+new_nr
