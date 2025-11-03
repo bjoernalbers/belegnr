@@ -14,7 +14,7 @@ START=1000
 
 # File to store the current number, which is overwritable via environment
 # variable BELEGNR_FILE.
-BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
+export BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Which action to perform.
 ACTION=""
@@ -34,6 +34,13 @@ EOM
 abort() {
 	echo "${SCRIPT_NAME}: $*" >&2
 	exit 1
+}
+
+# Read and validate current number from file.
+read_nr() {
+	_nr=$(cat "${BELEGNR_FILE}") || abort "could not read file: ${BELEGNR_FILE}"
+	[ "${_nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${BELEGNR_FILE}"
+	echo "${_nr}"
 }
 
 # Write current number atomically.
@@ -78,8 +85,7 @@ fi
 
 # If file exists, read, validate and increment number.
 if [ -f "${BELEGNR_FILE}" ]; then
-	nr=$(cat "${BELEGNR_FILE}") || abort "could not read file: ${BELEGNR_FILE}"
-	[ "${nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${BELEGNR_FILE}"
+	nr=$(read_nr)
 	nr=$((nr+1))
 # Else start from scratch.
 else
