@@ -26,9 +26,6 @@ test:
 	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1000
 	# Increment Belegnummer.
 	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1001
-	# Copy Belegnummer to macOS clipboard.
-	$(SCRIPT) -n -c -f "$(TEST_FILE)"
-	pbpaste | grep -q BE-1002
 	rm -rf "$(TEST_DIR)"
 
 $(DISTRIBUTION_PKG): $(SCRIPT)

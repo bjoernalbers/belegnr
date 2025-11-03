@@ -46,7 +46,6 @@ $ belegnr
 Usage: belegnr [OPTIONS]
 
 Options:
-  -c  Copy document number (Belegnummer) to macOS clipboard instead to stdout
   -f  File to store the current number (default: ~/.belegnr)
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
@@ -73,9 +72,6 @@ $ cat ~/.belegnr
 
 So ff you want to start numbering from a different number, you
 can manually create the file with your desired start number.
-
-Running `belegnr -nc` will copy a new document number into your
-clipboard (macOS) without displaying it on stdout.
 
 ## Uninstallation
 
