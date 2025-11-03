@@ -36,6 +36,11 @@ abort() {
 	exit 1
 }
 
+# Output the formatted document number.
+print_nr() {
+	echo "${PREFIX}$1"
+}
+
 # Parse options.
 while getopts 'hn' opt; do
 	case "${opt}" in
@@ -79,5 +84,4 @@ if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
        abort "could not write file: ${BELEGNR_FILE}"
 fi
 
-# Output the formatted document number.
-echo "${PREFIX}${nr}"
+print_nr "${nr}"
