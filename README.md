@@ -5,7 +5,7 @@
 ## Why?
 
 The German Federal Ministry of Finance (Bundesfinanzministerium) mandates that
-every document in the accounting system must be assigned a **unique document number**:
+every document in your accounting must be assigned a **unique document number**:
 
 > Jedem Geschäftsvorfall muss ein Beleg zugrunde liegen, mit folgenden Inhalten:
 >
@@ -15,10 +15,11 @@ every document in the accounting system must be assigned a **unique document num
 
 Source: [GoBD, issue 2023](https://ao.bundesfinanzministerium.de/ao/2023/Anhaenge/BMF-Schreiben-und-gleichlautende-Laendererlasse/Anhang-64/inhalt.html)
 
-Since using *foreign* invoice numbers does not guarantee unique document
-numbers, I wrote this little script.
+Using *external invoice numbers* as document numbers is a recipe for disaster
+because they *do not guarantee uniqueness*.
+
 `belegnr` helps with your bookkeeping by creating sequential, unique document
-numbers a.k.a "Belegnummern".
+numbers.
 
 ## Installation
 
