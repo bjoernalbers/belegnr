@@ -4,25 +4,25 @@
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
 # File name of this script (without path).
-script_name="${0##*/}"
+SCRIPT_NAME="${0##*/}"
 
 # Each document number starts with this string.
-prefix="BE-"
+PREFIX="BE-"
 
 # The first number.
-start=1000
+START=1000
 
 # File to store the current number, which is overwritable via environment
 # variable BELEGNR_FILE.
 BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Which action to perform.
-action=""
+ACTION=""
 
 # Display usage information.
 display_usage() {
 cat <<EOM
-Usage: ${script_name} [OPTIONS]
+Usage: ${SCRIPT_NAME} [OPTIONS]
 
 Options:
   -h  Display usage and exit
@@ -32,7 +32,7 @@ EOM
 
 # Abort script with an error message.
 abort() {
-	echo "${script_name}: $*" >&2
+	echo "${SCRIPT_NAME}: $*" >&2
 	exit 1
 }
 
@@ -44,7 +44,7 @@ while getopts 'hn' opt; do
 			exit 0
 			;;
 		n)
-			action="new"
+			ACTION="new"
 			;;
 		*)
 			display_usage
@@ -55,7 +55,7 @@ done
 shift $((OPTIND-1))
 
 # Display help and exit if no action specified.
-if [ -z "${action}" ]; then
+if [ -z "${ACTION}" ]; then
        display_usage
        exit 0
 fi
@@ -70,7 +70,7 @@ if [ -f "${BELEGNR_FILE}" ]; then
 	nr=$((nr+1))
 # Else start from scratch.
 else
-	nr="${start}"
+	nr="${START}"
 fi
 
 # Write current number atomically.
@@ -80,4 +80,4 @@ if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
 fi
 
 # Output the formatted document number.
-echo "${prefix}${nr}"
+echo "${PREFIX}${nr}"
