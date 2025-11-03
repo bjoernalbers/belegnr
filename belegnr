@@ -22,7 +22,7 @@ cat <<EOM
 Usage: ${SCRIPT_NAME} [OPTIONS]
 
 Options:
-  -h  Display usage and exit
+  -h  Display this help and exit
   -n  Create new document number (Belegnummer)
   -r  Reset counter to given value, i.e. -r 1000
 EOM
