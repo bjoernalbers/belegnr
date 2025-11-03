@@ -16,9 +16,6 @@ START=1000
 # variable BELEGNR_FILE.
 export BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
-# Which action to perform.
-ACTION=""
-
 # Display usage information.
 display_usage() {
 cat <<EOM
@@ -81,7 +78,8 @@ while getopts 'hn' opt; do
 			exit 0
 			;;
 		n)
-			ACTION="new"
+			new_nr
+			exit 0
 			;;
 		*)
 			display_usage
@@ -91,10 +89,4 @@ while getopts 'hn' opt; do
 done
 shift $((OPTIND-1))
 
-# Display help and exit if no action specified.
-if [ -z "${ACTION}" ]; then
-       display_usage
-       exit 0
-fi
-
-new_nr
+display_usage
