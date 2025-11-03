@@ -6,7 +6,7 @@ INSTALL_DIR      := /usr/local/bin
 PKGROOT_DIR      := $(shell mktemp -d)
 BUILD_DIR        := $(shell mktemp -d)
 TEST_DIR         := $(shell mktemp -d)
-TEST_FILE        := $(TEST_DIR)/.belegnr
+BELEGNR_FILE     := $(TEST_DIR)/.belegnr # Use temp. file during tests.
 COMPONENT_PKG    := $(BUILD_DIR)/$(PROJECT_NAME).pkg
 DISTRIBUTION_PKG := $(PROJECT_NAME).pkg
 

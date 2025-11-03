@@ -12,8 +12,9 @@ prefix="BE-"
 # The first number.
 start=1000
 
-# Default file to store the current number.
-file="${HOME}/.belegnr"
+# File to store the current number, which is overwritable via environment
+# variable BELEGNR_FILE.
+BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Which action to perform.
 action=""
@@ -63,9 +64,9 @@ fi
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # If file exists, read, validate and increment number.
-if [ -f "${file}" ]; then
-	nr=$(cat "${file}") || abort "could not read file: ${file}"
-	[ "${nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${file}"
+if [ -f "${BELEGNR_FILE}" ]; then
+	nr=$(cat "${BELEGNR_FILE}") || abort "could not read file: ${BELEGNR_FILE}"
+	[ "${nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${BELEGNR_FILE}"
 	nr=$((nr+1))
 # Else start from scratch.
 else
@@ -74,8 +75,8 @@ fi
 
 # Write current number atomically.
 tmp=$(mktemp) || abort "failed to create temporary file"
-if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${file}"); then
-       abort "could not write file: ${file}"
+if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
+       abort "could not write file: ${BELEGNR_FILE}"
 fi
 
 # Output the formatted document number.
