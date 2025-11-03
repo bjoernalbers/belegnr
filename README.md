@@ -46,7 +46,6 @@ $ belegnr
 Usage: belegnr [OPTIONS]
 
 Options:
-  -f  File to store the current number (default: ~/.belegnr)
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
 ```

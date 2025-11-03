@@ -27,9 +27,9 @@ test:
 	# Abort with invalid option.
 	! $(SCRIPT) -x >/dev/null 2>&1
 	# Create first Belegnummer when Belegnummerdatei is missing.
-	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1000
+	$(SCRIPT) -n | grep -q BE-1000
 	# Increment Belegnummer.
-	$(SCRIPT) -n -f "$(TEST_FILE)" | grep -q BE-1001
+	$(SCRIPT) -n | grep -q BE-1001
 	rm -rf "$(TEST_DIR)"
 
 $(DISTRIBUTION_PKG): $(SCRIPT)
