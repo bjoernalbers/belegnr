@@ -48,7 +48,7 @@ Usage: belegnr [OPTIONS]
 Options:
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
-  -r  Reset counter
+  -r  Reset counter to given value, i.e. -r 1000
 ```
 
 To create a new unique document number, use the `-n` flag:
@@ -69,9 +69,6 @@ The current number is stored in the file `~/.belegnr`:
 $ cat ~/.belegnr
 1002
 ```
-
-So ff you want to start numbering from a different number, you
-can manually create the file with your desired start number.
 
 ## Uninstallation
 

@@ -24,7 +24,7 @@ Usage: ${SCRIPT_NAME} [OPTIONS]
 Options:
   -h  Display usage and exit
   -n  Create new document number (Belegnummer)
-  -r  Reset counter
+  -r  Reset counter to given value, i.e. -r 1000
 EOM
 }
 
@@ -50,9 +50,10 @@ confirm() {
 
 # Reset counter.
 reset_counter() {
+	_start="$1"
 	confirm "Really reset counter?" || return
-	write_nr "${START}"
-	print_nr "${START}"
+	write_nr "${_start}"
+	print_nr "${_start}"
 }
 
 # Create new document number.
@@ -93,7 +94,7 @@ print_nr() {
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
-while getopts 'hnr' opt; do
+while getopts 'hnr:' opt; do
 	case "${opt}" in
 		h)
 			display_usage
@@ -104,7 +105,7 @@ while getopts 'hnr' opt; do
 			exit 0
 			;;
 		r)
-			reset_counter
+			reset_counter "${OPTARG}"
 			exit 0
 			;;
 		*)
