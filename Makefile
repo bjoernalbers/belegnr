@@ -16,6 +16,8 @@ install:
 	sudo cp -v "$(SCRIPT)" "$(INSTALL_DIR)"
 
 test:
+	# Lint script
+	shellcheck "$(SCRIPT)"
 	# Display usage when no option is given.
 	$(SCRIPT) | grep -q Usage
 	# Display usage with option -h.
