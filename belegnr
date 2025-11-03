@@ -36,6 +36,14 @@ abort() {
 	exit 1
 }
 
+# Write current number atomically.
+write_nr() {
+	tmp=$(mktemp) || abort "failed to create temporary file"
+	if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
+	       abort "could not write file: ${BELEGNR_FILE}"
+	fi
+}
+
 # Output the formatted document number.
 print_nr() {
 	echo "${PREFIX}$1"
@@ -78,10 +86,6 @@ else
 	nr="${START}"
 fi
 
-# Write current number atomically.
-tmp=$(mktemp) || abort "failed to create temporary file"
-if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
-       abort "could not write file: ${BELEGNR_FILE}"
-fi
+write_nr "${nr}"
 
 print_nr "${nr}"
