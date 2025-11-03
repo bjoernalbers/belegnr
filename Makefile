@@ -10,6 +10,8 @@ TEST_FILE        := $(TEST_DIR)/.belegnr
 COMPONENT_PKG    := $(BUILD_DIR)/$(PROJECT_NAME).pkg
 DISTRIBUTION_PKG := $(PROJECT_NAME).pkg
 
+all: test
+
 build: $(DISTRIBUTION_PKG)
 
 install:
@@ -60,4 +62,4 @@ endif
 	xcrun stapler staple "$(DISTRIBUTION_PKG)"
 	spctl --assess --type install "$(DISTRIBUTION_PKG)"
 
-.PHONY: build install test
+.PHONY: all build install test
