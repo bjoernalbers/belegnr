@@ -33,6 +33,8 @@ test:
 	$(SCRIPT) -n | grep -q BE-1000
 	# Increment Belegnummer.
 	$(SCRIPT) -n | grep -q BE-1001
+	# Abort counter reset.
+	echo "" | $(SCRIPT) -r | grep -vq BE-
 	# Reset counter.
 	echo "yes" | $(SCRIPT) -r | grep -q BE-1000
 	rm -rf "$(TEST_DIR)"

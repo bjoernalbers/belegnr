@@ -34,8 +34,23 @@ abort() {
 	exit 1
 }
 
+# Ask for confirmation.
+confirm() {
+	printf "%s (y/N): " "$1"
+	read -r answer
+	case "${answer}" in
+		[yY]*)
+			return 0
+			;;
+		*)
+			return 1
+			;;
+	esac
+}
+
 # Reset counter.
 reset_counter() {
+	confirm "Really reset counter?" || return
 	write_nr "${START}"
 	print_nr "${START}"
 }
