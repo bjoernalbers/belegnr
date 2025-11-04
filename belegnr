@@ -1,5 +1,5 @@
 #!/bin/sh
-# belegnr — Generate sequential, unique document numbers (Belegnummern)
+# belegnr — Generate sequential, unique document numbers (Belegnummern) 📄
 
 export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
@@ -12,8 +12,8 @@ BELEGNR_PREFIX="BE-"
 # The first number.
 BELEGNR_START=1
 
-# File to store the current number, which is overwritable via environment
-# variable BELEGNR_FILE.
+# File to store the counter, which is overwritable via environment variable
+# BELEGNR_FILE.
 BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Display usage information.
@@ -73,7 +73,7 @@ create_nr() {
 	write_nr "${nr}" && print_nr "${nr}"
 }
 
-# Read and validate current number from file.
+# Read and validate counter from file.
 read_nr() {
 	if ! nr=$(cat "${BELEGNR_FILE}" 2> /dev/null); then
 		warn "could not read file: ${BELEGNR_FILE}"
@@ -86,7 +86,7 @@ read_nr() {
 	echo "${nr}"
 }
 
-# Write current number to file.
+# Write counter to file.
 write_nr() {
 	nr="$1"
 	if ! echo "${nr}" > "${BELEGNR_FILE}"; then
