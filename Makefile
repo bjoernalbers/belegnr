@@ -31,7 +31,9 @@ test:
 	! $(SCRIPT) -x >/dev/null 2>&1
 	# Create first Belegnummer when Belegnummerdatei is missing.
 	$(SCRIPT) -c | grep -qE '^BE-1$$'
-	# Increment Belegnummer.
+	# Print current Belegnummer.
+	$(SCRIPT) -p | grep -qE '^BE-1$$'
+	# Create new Belegnummer.
 	$(SCRIPT) -c | grep -qE '^BE-2$$'
 	# Abort counter reset.
 	echo "" | $(SCRIPT) -r 1000 | grep -vq BE-

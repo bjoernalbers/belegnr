@@ -24,6 +24,7 @@ Usage: ${SCRIPT_NAME} [OPTIONS]
 Options:
   -c  Create new document number (Belegnummer)
   -h  Display this help and exit
+  -p  Print current document number (Belegnummer)
   -r  Reset counter to given value, i.e. -r 1000
 EOF
 }
@@ -97,7 +98,7 @@ print_nr() {
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
-while getopts 'chr:' opt; do
+while getopts 'chpr:' opt; do
 	case "${opt}" in
 		c)
 			create_nr
@@ -106,6 +107,10 @@ while getopts 'chr:' opt; do
 		h)
 			display_usage
 			exit 0
+			;;
+		p)
+			nr=$(read_nr)
+			print_nr "${nr}"
 			;;
 		r)
 			reset_counter "${OPTARG}"

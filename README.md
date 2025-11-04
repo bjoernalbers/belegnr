@@ -48,6 +48,7 @@ Usage: belegnr [OPTIONS]
 Options:
   -c  Create new document number (Belegnummer)
   -h  Display this help and exit
+  -p  Print current document number (Belegnummer)
   -r  Reset counter to given value, i.e. -r 1000
 ```
 
