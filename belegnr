@@ -55,8 +55,7 @@ reset_counter() {
 	if [ -f "${BELEGNR_FILE}" ]; then
 		confirm "Really reset counter?" || return
 	fi
-	write_nr "${nr}"
-	print_nr "${nr}"
+	write_nr "${nr}" && print_nr "${nr}"
 }
 
 # Create new document number.
@@ -69,8 +68,7 @@ create_nr() {
 	else
 		nr="${START}"
 	fi
-	write_nr "${nr}"
-	print_nr "${nr}"
+	write_nr "${nr}" && print_nr "${nr}"
 }
 
 # Read and validate current number from file.
