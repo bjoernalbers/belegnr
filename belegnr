@@ -77,7 +77,7 @@ read_nr() {
 	echo "${_nr}"
 }
 
-# Write current number atomically.
+# Write current number to file.
 write_nr() {
 	tmp=$(mktemp) || abort "failed to create temporary file"
 	if ! (echo "$1" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
@@ -85,12 +85,12 @@ write_nr() {
 	fi
 }
 
-# Output the formatted document number.
+# Print the formatted document number.
 print_nr() {
 	echo "${PREFIX}$1"
 }
 
-# Abort, if $HOME not set.
+# Abort, if $HOME is not set.
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
@@ -115,4 +115,5 @@ while getopts 'hnr:' opt; do
 	esac
 done
 
+# Display usage if no option was selected.
 display_usage
