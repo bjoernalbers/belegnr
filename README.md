@@ -54,14 +54,14 @@ Options:
   -r  Reset counter (~/.belegnr) to given value, i.e. -r 1000
 ```
 
-To create a new unique document number, use the `-n` flag:
+To create a new unique document number, use the `-c` flag:
 
 ```
-$ belegnr -n
+$ belegnr -c
 BE-1
-$ belegnr -n
+$ belegnr -c
 BE-2
-$ belegnr -n
+$ belegnr -c
 BE-3
 ```
 
@@ -73,7 +73,7 @@ Really reset counter? (y/N): y
 BE-1000
 ```
 
-The current number is stored in the file `~/.belegnr`:
+The counter is stored in the file `~/.belegnr`:
 
 ```
 $ cat ~/.belegnr
