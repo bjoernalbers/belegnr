@@ -18,14 +18,14 @@ export BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Display usage information.
 display_usage() {
-cat <<EOM
+cat <<EOF
 Usage: ${SCRIPT_NAME} [OPTIONS]
 
 Options:
   -h  Display this help and exit
   -n  Create new document number (Belegnummer)
   -r  Reset counter to given value, i.e. -r 1000
-EOM
+EOF
 }
 
 # Abort script with an error message.
