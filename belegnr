@@ -76,8 +76,12 @@ create_nr() {
 
 # Read and validate current number from file.
 read_nr() {
-	nr=$(cat "${BELEGNR_FILE}") || abort "could not read file: ${BELEGNR_FILE}"
-	[ "${nr}" -ge 0 ] 2> /dev/null || abort "file contains no valid number: ${BELEGNR_FILE}"
+	if ! nr=$(cat "${BELEGNR_FILE}"); then
+		abort "could not read file: ${BELEGNR_FILE}"
+	fi
+	if ! [ "${nr}" -ge 0 ] 2> /dev/null; then
+		abort "file contains no valid number: ${BELEGNR_FILE}"
+	fi
 	echo "${nr}"
 }
 
