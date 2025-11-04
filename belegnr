@@ -125,6 +125,7 @@ while getopts 'chpr:' opt; do
 			fi
 			nr=$(read_nr) || exit 1
 			print_nr "${nr}"
+			exit 0
 			;;
 		r)
 			reset_counter "${OPTARG}"
