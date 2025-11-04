@@ -121,6 +121,10 @@ while getopts 'chpr:' opt; do
 			exit 0
 			;;
 		p)
+			if [ ! -f "${BELEGNR_FILE}" ]; then
+				warn "create Belegnummer first with -c"
+				exit 1
+			fi
 			nr=$(read_nr) || exit 1
 			print_nr "${nr}"
 			;;
