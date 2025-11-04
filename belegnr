@@ -10,7 +10,7 @@ SCRIPT_NAME="${0##*/}"
 BELEGNR_PREFIX="BE-"
 
 # The first number.
-START=1
+BELEGNR_START=1
 
 # File to store the current number, which is overwritable via environment
 # variable BELEGNR_FILE.
@@ -74,7 +74,7 @@ create_nr() {
 		nr=$((nr+1))
 	# Else start from scratch.
 	else
-		nr="${START}"
+		nr="${BELEGNR_START}"
 	fi
 	write_nr "${nr}" && print_nr "${nr}"
 }
