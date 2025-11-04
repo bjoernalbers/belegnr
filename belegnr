@@ -7,7 +7,7 @@ export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 SCRIPT_NAME="${0##*/}"
 
 # Each document number starts with this string.
-PREFIX="BE-"
+BELEGNR_PREFIX="BE-"
 
 # The first number.
 START=1
@@ -104,7 +104,7 @@ write_nr() {
 # Print the formatted document number.
 print_nr() {
 	nr="$1"
-	echo "${PREFIX}${nr}"
+	echo "${BELEGNR_PREFIX}${nr}"
 }
 
 # Abort, if $HOME is not set.
