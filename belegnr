@@ -6,7 +6,7 @@ export PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 # File name of this script (without path).
 SCRIPT_NAME="${0##*/}"
 
-# Each document number starts with this string.
+# Each Belegnummer starts with this string.
 BELEGNR_PREFIX="BE-"
 
 # The first number.
@@ -60,7 +60,7 @@ reset_counter() {
 	write_nr "${nr}" && print_nr "${nr}"
 }
 
-# Create new document number.
+# Create new Belegnummer.
 create_nr() {
 	# If file exists, read and increment number.
 	if [ -f "${BELEGNR_FILE}" ]; then
@@ -95,7 +95,7 @@ write_nr() {
 	fi
 }
 
-# Print the formatted document number.
+# Print the formatted Belegnummer.
 print_nr() {
 	nr="$1"
 	echo "${BELEGNR_PREFIX}${nr}"

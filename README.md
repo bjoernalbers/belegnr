@@ -19,7 +19,7 @@ Using *external invoice numbers* as document numbers is a recipe for disaster
 because they *do not guarantee uniqueness*.
 
 `belegnr` helps with your bookkeeping by creating sequential, unique document
-numbers.
+numbers a.k.a. Belegnummern.
 
 ## Installation
 
@@ -54,7 +54,7 @@ Options:
   -r  Reset counter (~/.belegnr) to given value, i.e. -r 1000
 ```
 
-To create a new unique document number, use the `-c` flag:
+To create a new unique Belegnummer, use the `-c` flag:
 
 ```
 $ belegnr -c
