@@ -114,6 +114,5 @@ while getopts 'hnr:' opt; do
 			;;
 	esac
 done
-shift $((OPTIND-1))
 
 display_usage
