@@ -1,4 +1,4 @@
-# belegnr — Generate sequential, unique document numbers (Belegnummern)
+# belegnr — Generate sequential, unique document numbers (Belegnummern) 📄
 
 `belegnr` is a simple shell script to make you and the Finanzamt happy :-)
 
@@ -43,7 +43,7 @@ instructions:
 
 ```
 $ belegnr
-belegnr — Generate sequential, unique document numbers (Belegnummern)
+belegnr — Generate sequential, unique document numbers (Belegnummern) 📄
 
 Usage: belegnr [OPTIONS]
 
@@ -62,6 +62,13 @@ BE-1
 $ belegnr -c
 BE-2
 $ belegnr -c
+BE-3
+```
+
+Print the current (latest) Belegnummer with `-p`:
+
+```
+$ belegnr -p
 BE-3
 ```
 

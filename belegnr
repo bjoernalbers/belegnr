@@ -19,7 +19,7 @@ BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 # Display usage information.
 display_usage() {
 cat <<EOF
-${SCRIPT_NAME} — Generate sequential, unique document numbers (Belegnummern)
+${SCRIPT_NAME} — Generate sequential, unique document numbers (Belegnummern) 📄
 
 Usage: ${SCRIPT_NAME} [OPTIONS]
 
