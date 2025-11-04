@@ -14,7 +14,7 @@ START=1
 
 # File to store the current number, which is overwritable via environment
 # variable BELEGNR_FILE.
-export BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
+BELEGNR_FILE="${BELEGNR_FILE:-${HOME}/.belegnr}"
 
 # Display usage information.
 display_usage() {
