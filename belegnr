@@ -84,9 +84,8 @@ read_nr() {
 # Write current number to file.
 write_nr() {
 	nr="$1"
-	tmp=$(mktemp) || abort "failed to create temporary file"
-	if ! (echo "${nr}" > "${tmp}" && mv -f "${tmp}" "${BELEGNR_FILE}"); then
-	       abort "could not write file: ${BELEGNR_FILE}"
+	if ! echo "${nr}" > "${BELEGNR_FILE}"; then
+		abort "could not write file: ${BELEGNR_FILE}"
 	fi
 }
 
