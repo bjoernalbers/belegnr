@@ -31,12 +31,6 @@ Options:
 EOF
 }
 
-# Abort script with an error message.
-abort() {
-	warn "$*"
-	exit 1
-}
-
 # Print warning on stderr.
 warn() {
 	echo "${SCRIPT_NAME}: $*" >&2
@@ -108,7 +102,10 @@ print_nr() {
 }
 
 # Abort, if $HOME is not set.
-[ -n "${HOME}" ] || abort "variable HOME not defined or empty"
+if [ ! -n "${HOME}" ]; then
+	warn "variable HOME not defined or empty"
+	exit 1
+fi
 
 # Parse options.
 while getopts 'chpr:' opt; do
