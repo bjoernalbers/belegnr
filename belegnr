@@ -64,7 +64,7 @@ reset_counter() {
 create_nr() {
 	# If file exists, read and increment number.
 	if [ -f "${BELEGNR_FILE}" ]; then
-		nr=$(read_nr)
+		nr=$(read_nr) || return 1
 		nr=$((nr+1))
 	# Else start from scratch.
 	else
