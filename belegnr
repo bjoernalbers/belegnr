@@ -22,8 +22,8 @@ cat <<EOF
 Usage: ${SCRIPT_NAME} [OPTIONS]
 
 Options:
+  -c  Create new document number (Belegnummer)
   -h  Display this help and exit
-  -n  Create new document number (Belegnummer)
   -r  Reset counter to given value, i.e. -r 1000
 EOF
 }
@@ -60,7 +60,7 @@ reset_counter() {
 }
 
 # Create new document number.
-new_nr() {
+create_nr() {
 	# If file exists, read and increment number.
 	if [ -f "${BELEGNR_FILE}" ]; then
 		nr=$(read_nr)
@@ -99,14 +99,14 @@ print_nr() {
 [ -n "${HOME}" ] || abort "variable HOME not defined or empty"
 
 # Parse options.
-while getopts 'hnr:' opt; do
+while getopts 'chr:' opt; do
 	case "${opt}" in
-		h)
-			display_usage
+		c)
+			create_nr
 			exit 0
 			;;
-		n)
-			new_nr
+		h)
+			display_usage
 			exit 0
 			;;
 		r)
