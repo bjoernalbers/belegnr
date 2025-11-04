@@ -131,7 +131,7 @@ while getopts 'chpr:' opt; do
 			;;
 		r)
 			reset_counter "${OPTARG}"
-			exit 0
+			exit
 			;;
 		*)
 			display_usage
