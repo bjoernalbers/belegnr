@@ -43,13 +43,15 @@ instructions:
 
 ```
 $ belegnr
+belegnr — Generate sequential, unique document numbers (Belegnummern)
+
 Usage: belegnr [OPTIONS]
 
 Options:
-  -c  Create new document number (Belegnummer)
+  -c  Create new Belegnummer
   -h  Display this help and exit
-  -p  Print current document number (Belegnummer)
-  -r  Reset counter to given value, i.e. -r 1000
+  -p  Print current Belegnummer
+  -r  Reset counter (~/.belegnr) to given value, i.e. -r 1000
 ```
 
 To create a new unique document number, use the `-n` flag:
