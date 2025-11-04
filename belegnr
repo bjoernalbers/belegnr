@@ -51,7 +51,10 @@ confirm() {
 # Reset counter.
 reset_counter() {
 	nr="$1"
-	confirm "Really reset counter?" || return
+	# If file exists, ask for confirmation before reset.
+	if [ -f "${BELEGNR_FILE}" ]; then
+		confirm "Really reset counter?" || return
+	fi
 	write_nr "${nr}"
 	print_nr "${nr}"
 }
