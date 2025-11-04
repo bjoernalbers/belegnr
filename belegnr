@@ -96,7 +96,8 @@ read_nr() {
 write_nr() {
 	nr="$1"
 	if ! echo "${nr}" > "${BELEGNR_FILE}"; then
-		abort "could not write file: ${BELEGNR_FILE}"
+		warn "could not write to file: ${BELEGNR_FILE}"
+		return 1
 	fi
 }
 
@@ -114,7 +115,7 @@ while getopts 'chpr:' opt; do
 	case "${opt}" in
 		c)
 			create_nr
-			exit 0
+			exit
 			;;
 		h)
 			display_usage
