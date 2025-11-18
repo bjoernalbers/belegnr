@@ -57,7 +57,7 @@ reset_counter() {
 	if [ -f "${BELEGNR_FILE}" ]; then
 		confirm "Really reset counter?" || return
 	fi
-	write_nr "${counter}" && print_nr "${counter}"
+	write_counter "${counter}" && print_nr "${counter}"
 }
 
 # Create new Belegnummer.
@@ -70,7 +70,7 @@ create_belegnr() {
 	else
 		counter="${BELEGNR_START}"
 	fi
-	write_nr "${counter}" && print_nr "${counter}"
+	write_counter "${counter}" && print_nr "${counter}"
 }
 
 # Read and validate counter from file.
@@ -87,7 +87,7 @@ read_nr() {
 }
 
 # Write counter to file.
-write_nr() {
+write_counter() {
 	counter="$1"
 	if ! echo "${counter}" > "${BELEGNR_FILE}"; then
 		warn "could not write to file: ${BELEGNR_FILE}"
