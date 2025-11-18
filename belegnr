@@ -9,8 +9,8 @@ SCRIPT_NAME="${0##*/}"
 # Each Belegnummer starts with this string.
 BELEGNR_PREFIX="BE-"
 
-# The first number.
-BELEGNR_START=1
+# The first Belegnummer starts with this number.
+COUNTER_START=1
 
 # File to store the counter, which is overwritable via environment variable
 # BELEGNR_FILE.
@@ -68,7 +68,7 @@ create_belegnr() {
 		counter=$((counter+1))
 	# Else start from scratch.
 	else
-		counter="${BELEGNR_START}"
+		counter="${COUNTER_START}"
 	fi
 	write_counter "${counter}" && print_belegnr "${counter}"
 }
