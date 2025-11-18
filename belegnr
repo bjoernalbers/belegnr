@@ -61,7 +61,7 @@ reset_counter() {
 }
 
 # Create new Belegnummer.
-create_nr() {
+create_belegnr() {
 	# If file exists, read and increment number.
 	if [ -f "${BELEGNR_FILE}" ]; then
 		counter=$(read_nr) || return 1
@@ -111,7 +111,7 @@ fi
 while getopts 'chpr:' opt; do
 	case "${opt}" in
 		c)
-			create_nr
+			create_belegnr
 			exit
 			;;
 		h)
