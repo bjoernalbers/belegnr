@@ -75,7 +75,7 @@ create_belegnr() {
 
 # Read and validate counter from file.
 read_counter() {
-	if ! counter=$(cat "${BELEGNR_FILE}" 2> /dev/null); then
+	if ! read -r counter < "${BELEGNR_FILE}"; then
 		warn "could not read file: ${BELEGNR_FILE}"
 		return 1
 	fi
