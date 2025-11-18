@@ -52,44 +52,44 @@ confirm() {
 
 # Reset counter.
 reset_counter() {
-	nr="$1"
+	counter="$1"
 	# If file exists, ask for confirmation before reset.
 	if [ -f "${BELEGNR_FILE}" ]; then
 		confirm "Really reset counter?" || return
 	fi
-	write_nr "${nr}" && print_nr "${nr}"
+	write_nr "${counter}" && print_nr "${counter}"
 }
 
 # Create new Belegnummer.
 create_nr() {
 	# If file exists, read and increment number.
 	if [ -f "${BELEGNR_FILE}" ]; then
-		nr=$(read_nr) || return 1
-		nr=$((nr+1))
+		counter=$(read_nr) || return 1
+		counter=$((counter+1))
 	# Else start from scratch.
 	else
-		nr="${BELEGNR_START}"
+		counter="${BELEGNR_START}"
 	fi
-	write_nr "${nr}" && print_nr "${nr}"
+	write_nr "${counter}" && print_nr "${counter}"
 }
 
 # Read and validate counter from file.
 read_nr() {
-	if ! nr=$(cat "${BELEGNR_FILE}" 2> /dev/null); then
+	if ! counter=$(cat "${BELEGNR_FILE}" 2> /dev/null); then
 		warn "could not read file: ${BELEGNR_FILE}"
 		return 1
 	fi
-	if ! [ "${nr}" -ge 0 ] 2> /dev/null; then
+	if ! [ "${counter}" -ge 0 ] 2> /dev/null; then
 		warn "file contains no valid number: ${BELEGNR_FILE}"
 		return 1
 	fi
-	echo "${nr}"
+	echo "${counter}"
 }
 
 # Write counter to file.
 write_nr() {
-	nr="$1"
-	if ! echo "${nr}" > "${BELEGNR_FILE}"; then
+	counter="$1"
+	if ! echo "${counter}" > "${BELEGNR_FILE}"; then
 		warn "could not write to file: ${BELEGNR_FILE}"
 		return 1
 	fi
@@ -97,8 +97,8 @@ write_nr() {
 
 # Print the formatted Belegnummer.
 print_nr() {
-	nr="$1"
-	echo "${BELEGNR_PREFIX}${nr}"
+	counter="$1"
+	echo "${BELEGNR_PREFIX}${counter}"
 }
 
 # Abort, if $HOME is not set.
@@ -123,8 +123,8 @@ while getopts 'chpr:' opt; do
 				warn "create Belegnummer first with -c"
 				exit 1
 			fi
-			nr=$(read_nr) || exit 1
-			print_nr "${nr}"
+			counter=$(read_nr) || exit 1
+			print_nr "${counter}"
 			exit 0
 			;;
 		r)
