@@ -8,7 +8,7 @@ I do my accounting with [sevdesk](https://sevdesk.de) and am generally quite
 happy with it.
 But one thing bothers me:
 sevdesk [does not](https://forum.sevdesk.de/t/automatische-vergabe-von-belegnummern/3005)
-automatically generate **unique document numbers**, which is required by the
+automatically generate **unique document numbers**, which are required by the
 German Federal Ministry of Finance (Bundesfinanzministerium):
 
 > Jedem Geschäftsvorfall muss ein Beleg zugrunde liegen, mit folgenden Inhalten:
