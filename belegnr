@@ -57,7 +57,7 @@ reset_counter() {
 	if [ -f "${BELEGNR_FILE}" ]; then
 		confirm "Really reset counter?" || return
 	fi
-	write_counter "${counter}" && print_belegnr "${counter}"
+	write_counter "${counter}" && echo_belegnr "${counter}"
 }
 
 # Create new Belegnummer.
@@ -70,7 +70,7 @@ create_belegnr() {
 	else
 		counter="${COUNTER_START}"
 	fi
-	write_counter "${counter}" && print_belegnr "${counter}"
+	write_counter "${counter}" && echo_belegnr "${counter}"
 }
 
 # Read and validate counter from file.
@@ -95,8 +95,8 @@ write_counter() {
 	fi
 }
 
-# Print the formatted Belegnummer.
-print_belegnr() {
+# Echo the formatted Belegnummer on stdout.
+echo_belegnr() {
 	counter="$1"
 	echo "${BELEGNR_PREFIX}${counter}"
 }
@@ -124,7 +124,7 @@ while getopts 'chpr:' opt; do
 				exit 1
 			fi
 			counter=$(read_counter) || exit 1
-			print_belegnr "${counter}"
+			echo_belegnr "${counter}"
 			exit 0
 			;;
 		r)
