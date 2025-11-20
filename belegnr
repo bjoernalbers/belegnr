@@ -50,6 +50,16 @@ confirm() {
 	esac
 }
 
+# Print current Belegnummer.
+print_belegnr() {
+	if [ ! -f "${BELEGNR_FILE}" ]; then
+		warn "create Belegnummer first with -c"
+		exit 1
+	fi
+	counter=$(read_counter) || exit 1
+	echo_belegnr "${counter}"
+}
+
 # Reset counter.
 reset_counter() {
 	counter="$1"
@@ -119,13 +129,8 @@ while getopts 'chpr:' opt; do
 			exit 0
 			;;
 		p)
-			if [ ! -f "${BELEGNR_FILE}" ]; then
-				warn "create Belegnummer first with -c"
-				exit 1
-			fi
-			counter=$(read_counter) || exit 1
-			echo_belegnr "${counter}"
-			exit 0
+			print_belegnr
+			exit
 			;;
 		r)
 			reset_counter "${OPTARG}"
