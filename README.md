@@ -4,8 +4,12 @@
 
 ## Why?
 
-The German Federal Ministry of Finance (Bundesfinanzministerium) mandates that
-every document in your accounting must be assigned a **unique document number**:
+I do my accounting with [sevdesk](https://sevdesk.de) and am generally quite
+happy with it.
+But one thing bothers me:
+sevdesk [does not](https://forum.sevdesk.de/t/automatisierte-belegnummerierung/6664)
+automatically generate **unique document numbers**, which is required by the
+German Federal Ministry of Finance (Bundesfinanzministerium):
 
 > Jedem Geschäftsvorfall muss ein Beleg zugrunde liegen, mit folgenden Inhalten:
 >
@@ -15,10 +19,10 @@ every document in your accounting must be assigned a **unique document number**:
 
 Source: [GoBD, issue 2023](https://ao.bundesfinanzministerium.de/ao/2023/Anhaenge/BMF-Schreiben-und-gleichlautende-Laendererlasse/Anhang-64/inhalt.html)
 
-Using *external invoice numbers* as document numbers is a recipe for disaster
-because they *do not guarantee uniqueness*.
+(Using *external invoice numbers* as document numbers does not guarantee
+uniqueness.)
 
-`belegnr` helps with your bookkeeping by creating sequential, unique document
+`belegnr` helps with my bookkeeping by creating sequential, unique document
 numbers a.k.a. Belegnummern.
 
 ## Installation
