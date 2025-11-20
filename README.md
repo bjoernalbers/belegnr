@@ -7,7 +7,7 @@
 I do my accounting with [sevdesk](https://sevdesk.de) and am generally quite
 happy with it.
 But one thing bothers me:
-sevdesk [does not](https://forum.sevdesk.de/t/automatisierte-belegnummerierung/6664)
+sevdesk [does not](https://forum.sevdesk.de/t/automatische-vergabe-von-belegnummern/3005)
 automatically generate **unique document numbers**, which is required by the
 German Federal Ministry of Finance (Bundesfinanzministerium):
 
