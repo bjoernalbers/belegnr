@@ -40,6 +40,10 @@ sudo curl -fsSL -o /usr/local/bin/belegnr \
 
 You can also clone this repository and run `make install`.
 
+Here is a
+[macOS shortcut](https://www.icloud.com/shortcuts/66b8fa6cd96846c0868877b4618659b7)
+to create a new Belegnummer via `belegnr` and copy it into the clipboard.
+
 ## Usage
 
 Run `belegnr` without options (or with `-h` flag) to display usage
